@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가우스 소거법 계산기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="wrap">
+        <h1>가우스 소거법 계산기</h1>
+
+        <form id="matrix-form" action="/solve" method="post">
+            <div class="toolbar">
+                <label for="size">미지수 개수</label>
+                <input id="size" type="number" min="2" max="10" value="3">
+                <button type="button" id="resize-btn">입력칸 만들기</button>
+                <button type="button" id="sample-btn">예제 입력</button>
+            </div>
+
+            <div class="matrix-area">
+                <table aria-label="연립방정식 확대행렬">
+                    <tbody id="matrix-body"></tbody>
+                </table>
+            </div>
+
+            <textarea id="matrix" name="matrix" hidden></textarea>
+
+            <button class="primary" type="submit">계산</button>
+        </form>
+
+        {% if error %}
+        <section class="message error">
+            {{ error }}
+        </section>
+        {% endif %}
+
+        {% if result %}
+        <section class="message result">
+            <h2>계산 결과</h2>
+            <pre>{{ result }}</pre>
+        </section>
+        {% endif %}
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
